@@ -9,7 +9,7 @@ import io.ktor.server.routing.*
 
 fun Route.contactRoutes(contactRepository: ContactRepository) {
     route("/contact") {
-        get("{id}") {
+        get {
             try {
                 val id = call.getId()
                 call.respondText(contactRepository.get(id).toString())
@@ -20,7 +20,7 @@ fun Route.contactRoutes(contactRepository: ContactRepository) {
         post {
             call.respondText(contactRepository.create().toString())
         }
-        put("{id}") {
+        put {
             try {
                 val id = call.getId()
                 call.respondText(contactRepository.update(id).toString())
@@ -28,7 +28,7 @@ fun Route.contactRoutes(contactRepository: ContactRepository) {
                 call.respondText(e.message ?: "Bad Request", status = HttpStatusCode.BadRequest)
             }
         }
-        delete("{id}") {
+        delete {
             try {
                 val id = call.getId()
                 call.respondText(contactRepository.delete(id).toString())

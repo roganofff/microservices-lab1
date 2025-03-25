@@ -9,7 +9,7 @@ import io.ktor.server.routing.*
 
 fun Route.groupRoutes(groupRepository: GroupRepository) {
     route("/group") {
-        get("{id}") {
+        get {
             try {
                 val id = call.getId()
                 call.respondText(groupRepository.get(id).toString())
@@ -20,7 +20,7 @@ fun Route.groupRoutes(groupRepository: GroupRepository) {
         post {
             call.respondText(groupRepository.create().toString())
         }
-        put("{id}") {
+        put {
             try {
                 val id = call.getId()
                 call.respondText(groupRepository.update(id).toString())
@@ -28,7 +28,7 @@ fun Route.groupRoutes(groupRepository: GroupRepository) {
                 call.respondText(e.message ?: "Bad Request", status = HttpStatusCode.BadRequest)
             }
         }
-        delete("{id}") {
+        delete {
             try {
                 val id = call.getId()
                 call.respondText(groupRepository.delete(id).toString())
