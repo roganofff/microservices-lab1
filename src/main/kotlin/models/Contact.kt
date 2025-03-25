@@ -10,4 +10,16 @@ data class Contact(
     var phones: MutableList<Phone>,
     var emails: MutableList<String>,
     val birthDate: Date,
-)
+) {
+    override fun toString(): String {
+        return """
+            id: $id,
+            username: $username,
+            givenName: $givenName,
+            familyName: $familyName,
+            phones: ${phones.joinToString(prefix = "[", postfix = "]", separator = ", ")},
+            emails: ${emails.joinToString(prefix = "[", postfix = "]", separator = ", ")},
+            birthDate: $birthDate
+        """.trimIndent()
+    }
+}
