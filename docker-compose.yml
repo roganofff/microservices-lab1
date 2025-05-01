@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  nginx:
+    image: nginx:stable-alpine
+    container_name: nginx_lb
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "80:80"
+    depends_on:
+      - contact_app_1
+      - contact_app_2
+      - contact_app_3
+
+  contact_app_1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: contact_app_1
+
+  contact_app_2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: contact_app_2
+
+  contact_app_3:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: contact_app_3
